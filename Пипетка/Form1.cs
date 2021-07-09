@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -66,7 +67,7 @@ namespace Пипетка
 
         private void MadeImage()
         {
-            ScreenDisplay = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            ScreenDisplay = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
             Graphics g = Graphics.FromImage(ScreenDisplay);
             g.CopyFromScreen(0, 0, 0, 0, ScreenDisplay.Size);
 
