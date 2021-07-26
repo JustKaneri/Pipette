@@ -59,6 +59,7 @@
             // 
             // CbxKeys
             // 
+            this.CbxKeys.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbxKeys.FormattingEnabled = true;
             this.CbxKeys.Location = new System.Drawing.Point(6, 47);
             this.CbxKeys.Name = "CbxKeys";

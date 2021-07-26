@@ -49,19 +49,22 @@ namespace Пипетка
                 using (FileStream fs = File.OpenRead("config.config"))
                 {
                     ForStart = (KeysForStart)bf.Deserialize(fs);
-                    CbxKeys.SelectedText = ForStart.contol.ToString();
+                    CbxKeys.SelectedIndex = int.Parse(ForStart.contol.ToString().Remove(0,1))-1;
                 }
             }
             else
             {
                 ForStart.contol = Keys.F8;
-                CbxKeys.SelectedText = "F8";
+                CbxKeys.SelectedIndex = 7;
             }
         }
 
         private void FormProperties_FormClosing(object sender, FormClosingEventArgs e)
         {
             BinaryFormatter bf = new BinaryFormatter();
+
+            if (File.Exists("config.config"))
+                File.Delete("config.config");
 
             using (FileStream fs = File.Create("config.config"))
             {
