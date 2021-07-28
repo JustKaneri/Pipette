@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
 
 namespace Пипетка
 {
@@ -139,7 +131,7 @@ namespace Пипетка
 
             BinaryFormatter bf = new BinaryFormatter();
 
-            using (FileStream fs = File.OpenRead("config.config"))
+            using (FileStream fs = File.OpenRead(properties.FilePropertiesPath))
             {
                 conf = (FormProperties.KeysForStart)bf.Deserialize(fs);
                 gkh.HookedKeys.Clear();

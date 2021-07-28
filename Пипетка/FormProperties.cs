@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -18,6 +11,7 @@ namespace Пипетка
         public FormProperties()
         {
             InitializeComponent();
+            FilePropertiesPath = Environment.CurrentDirectory + "\\config.config";
         }
 
         [Serializable]
@@ -25,6 +19,8 @@ namespace Пипетка
         {
             public Keys contol;
         }
+
+        public readonly string FilePropertiesPath;
 
         private KeysForStart ForStart;
 
@@ -42,11 +38,11 @@ namespace Пипетка
                 CbxKeys.Items.Add("F" + i);
             }
 
-            if (File.Exists("config.config"))
+            if (File.Exists(FilePropertiesPath))
             {
                 BinaryFormatter bf = new BinaryFormatter();
 
-                using (FileStream fs = File.OpenRead("config.config"))
+                using (FileStream fs = File.OpenRead(FilePropertiesPath))
                 {
                     ForStart = (KeysForStart)bf.Deserialize(fs);
                     CbxKeys.SelectedIndex = int.Parse(ForStart.contol.ToString().Remove(0,1))-1;
@@ -63,10 +59,10 @@ namespace Пипетка
         {
             BinaryFormatter bf = new BinaryFormatter();
 
-            if (File.Exists("config.config"))
-                File.Delete("config.config");
+            if (File.Exists(FilePropertiesPath))
+                File.Delete(FilePropertiesPath);
 
-            using (FileStream fs = File.Create("config.config"))
+            using (FileStream fs = File.Create(FilePropertiesPath))
             {
                 bf.Serialize(fs, ForStart);
             }
